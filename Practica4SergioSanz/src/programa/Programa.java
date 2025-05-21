@@ -2,6 +2,7 @@ package programa;
 
 import clases.*;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Programa {
@@ -20,17 +21,34 @@ public class Programa {
 
 			System.out.print("Introduce tu nombre: ");
 			String nombre = entrada.nextLine();
+			
+			boolean valido = false;
 
-			System.out.println("Elige tu clase:\n1. Mago\n2. Guerrero");
-			System.out.print("Elige (1, 2): ");
-			int eleccion = entrada.nextInt();
-			entrada.nextLine();
+			do {
+				try {
+					System.out.println("Elige tu clase:\n1. Mago\n2. Guerrero");
+					System.out.print("Elige (1, 2): ");
+					int eleccion = entrada.nextInt();
 
-			if (eleccion == 1) {
-				juego.nuevoMago(nombre);
-			} else {
-				juego.nuevoGuerrero(nombre);
-			}
+					if (eleccion == 1) {
+						juego.nuevoMago(nombre);
+						valido = true;
+					} else if (eleccion == 2) {
+						juego.nuevoGuerrero(nombre);
+						valido = true;
+					} else {
+						throw new Exception("Número fuera de rango");
+					}
+				} catch (InputMismatchException e) {
+					System.out.println("Debes introducir un número.");
+
+				} catch (Exception e) {
+					System.out.println("Opción no válida.");
+					
+				} finally{
+					entrada.nextLine();
+				}
+			} while (!valido);
 
 			juego.iniciarJuego();
 

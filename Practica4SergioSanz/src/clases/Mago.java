@@ -25,9 +25,14 @@ public class Mago extends Personaje implements Jugable{
 
     @Override
     public void curar() {
-        if (magia > 0) {
-            System.out.println("SI ME ESTOY CURANDO");
-    }}
+    	if (magia > 0) {
+            this.setVida(this.getVida() + this.getAtaque());
+            if (this.getVida() > this.getVidaInicial()) {
+                this.setVida(this.getVidaInicial());
+            }
+            magia--;
+        }
+    }
 
     @Override
     public void resetear() {

@@ -30,7 +30,7 @@ public abstract class Personaje {
     }
 
     public void setVida(int vida) {
-        this.vida = vida;
+        this.vida = vida < 0 ? 0 : vida;
     }
 
     public int getVidaInicial() {
@@ -60,9 +60,6 @@ public abstract class Personaje {
     public void atacar(Personaje otro) {
     	int danio = (this.ataque - otro.getDefensa()) < 0 ? 0 : (this.ataque - otro.getDefensa());
     	otro.setVida(otro.getVida() - danio);
-    	if (otro.getVida() < 0) {
-    	    otro.setVida(0);
-    	}
     }
 
     public void resetear() {
