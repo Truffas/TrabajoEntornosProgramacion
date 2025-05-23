@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clases.Enemigo;
@@ -12,8 +13,8 @@ public class PruebasEnemigo {
 
 	static Enemigo enemigo;
 	
-@BeforeAll
-	static void crearCuenta() {
+@BeforeEach
+	void crearCuenta() {
 		enemigo = new Enemigo();
 }
 	
@@ -29,7 +30,7 @@ public class PruebasEnemigo {
 
         assertTrue(vida >= 20 && vida <= 100);
         assertEquals(vida, vidaInicial);
-        assertTrue(ataque >= 2 && ataque <= 16);
+        assertTrue(ataque >= 2 && ataque <= 15);
         assertTrue(defensa >= 1 && defensa <= 3);
     }
 	

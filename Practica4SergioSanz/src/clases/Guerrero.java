@@ -11,6 +11,14 @@ public class Guerrero extends Personaje implements Jugable{
         super(nombre, vida, ATAQUE, DEFENSA);
         this.pociones = POCIONES;
     }
+    
+    public int getPociones() {
+		return pociones;
+	}
+
+	public void setPociones(int pociones) {
+		this.pociones = pociones;
+	}
 
     @Override
     public void curar() {
@@ -26,7 +34,8 @@ public class Guerrero extends Personaje implements Jugable{
         this.pociones = POCIONES;
     }
 
-    @Override
+
+	@Override
     public String toString() {
         return super.toString() + "; Pociones: " + pociones;
     }

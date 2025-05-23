@@ -9,7 +9,7 @@ public class Enemigo extends Personaje {
         int vida = (int) (Math.random() * 81) + 20; 
         this.setVida(vida);
         this.setVidaInicial(vida);
-        this.setAtaque((int) (Math.random() * 15) + 2); 
+        this.setAtaque((int) (Math.random() * 14) + 2); 
         this.setDefensa((int) (Math.random() * 3) + 1); 
     }
 }
