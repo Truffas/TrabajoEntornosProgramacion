@@ -1,7 +1,10 @@
 package clases;
 
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Juego {
     private static final String[] nombresEnemigos = {"Seath", "Nito", "Cuatro Reyes", "Lecho del Caos", "Gwyn"};
@@ -79,4 +82,38 @@ public class Juego {
     public void setRonda(int ronda) {
         this.ronda = ronda;
     }
+    
+    
+    public static void mostrarMejorPuntuacion() {
+    	File archivo = new File("registroMejores/mejorPuntuacion.txt");
+    	
+    	if (archivo.exists()) {
+    		try {
+    			Scanner entradaArchivo = new Scanner(archivo);
+    			String nombre = entradaArchivo.nextLine(); //aquí leemos el nombre
+    			int nRondas = Integer.parseInt(entradaArchivo.nextLine()); // y aquí las rondas
+    			System.out.println("El mejor jugador es: " + nombre + ", con un total de: " + nRondas + " rondas");
+    			entradaArchivo.close();
+    		} catch (Exception e) {
+    			System.err.println("Error al intentar leer el archivo");
+    		}
+    	} else {
+    		System.out.println("Todavía no hay ninguna puntuación guardada");
+    	}
+    }
+    
+    public static void guardarSiEsMejor(String nombre, int nRondas) {
+    	File archivo = new File("registroMejores/mejorPuntuacion.txt");
+    	int mejorRonda = 0;
+    	if (archivo.exists()) {
+    		try {
+        		
+        	} catch(Exception e) {
+        		System.err.println();
+        	}	
+    	} 
+    	
+    }
+    
+    
 }
