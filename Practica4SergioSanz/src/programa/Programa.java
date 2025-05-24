@@ -9,9 +9,9 @@ public class Programa {
 	public static void main(String[] args) {
 		Scanner entrada = new Scanner(System.in);
 		String respuesta;
-
 		do {
 			Juego juego = new Juego();
+
 
 			System.out.println("Bienvenido al juego:");
 			System.out.print("¿Cuántas rondas quieres jugar? ");
@@ -95,6 +95,9 @@ public class Programa {
 			} else {
 				System.out.println("Has ganado!");
 			}
+			
+			Juego.mostrarMejorPuntuacion();
+			Juego.guardarSiEsMejor(nombre, juego.getnRondas());
 
 			System.out.print("¿Volver a jugar? (s/n): ");
 			respuesta = entrada.nextLine();
@@ -102,6 +105,7 @@ public class Programa {
 		} while (respuesta.equalsIgnoreCase("s"));
 
 		System.out.println("Gracias por jugar!");
+		
 		entrada.close();
 	}
 }

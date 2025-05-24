@@ -103,8 +103,14 @@ public class Juego {
 	}
 
 	public static void guardarSiEsMejor(String nombre, int nRondas) {
+		File carpeta = new File("registroMejores");
+		if (!carpeta.exists()) {
+			carpeta.mkdirs(); // aquí creamos la carpeta si no existe
+		}
+		
 		File archivo = new File("registroMejores/mejorPuntuacion.txt");
 		int mejorRonda = 0;
+		
 		if (archivo.exists()) {
 			try {
 				Scanner entradaArchivo = new Scanner(archivo);
