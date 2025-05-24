@@ -12,7 +12,6 @@ public class Programa {
 		do {
 			Juego juego = new Juego();
 
-
 			System.out.println("Bienvenido al juego:");
 			System.out.print("¿Cuántas rondas quieres jugar? ");
 			int rondas = entrada.nextInt();
@@ -21,7 +20,7 @@ public class Programa {
 
 			System.out.print("Introduce tu nombre: ");
 			String nombre = entrada.nextLine();
-			
+
 			boolean valido = false;
 
 			do {
@@ -44,8 +43,8 @@ public class Programa {
 
 				} catch (Exception e) {
 					System.out.println("Opción no válida.");
-					
-				} finally{
+
+				} finally {
 					entrada.nextLine();
 				}
 			} while (!valido);
@@ -69,13 +68,13 @@ public class Programa {
 					juego.getJugador().atacar(enemigo);
 				} else if (accion == 2) {
 					System.out.println(juego.getJugador().getNombre() + " se cura");
-					if(juego.getJugador() instanceof Mago) {
-						((Mago) juego.getJugador()).curar();				
+					if (juego.getJugador() instanceof Mago) {
+						((Mago) juego.getJugador()).curar();
 					}
-					if(juego.getJugador() instanceof Guerrero) {
-						((Guerrero) juego.getJugador()).curar();				
+					if (juego.getJugador() instanceof Guerrero) {
+						((Guerrero) juego.getJugador()).curar();
 					}
-					
+
 				}
 
 				if (!enemigo.muerto()) {
@@ -95,7 +94,7 @@ public class Programa {
 			} else {
 				System.out.println("Has ganado!");
 			}
-			
+
 			Juego.mostrarMejorPuntuacion();
 			Juego.guardarSiEsMejor(nombre, juego.getnRondas());
 
@@ -105,7 +104,7 @@ public class Programa {
 		} while (respuesta.equalsIgnoreCase("s"));
 
 		System.out.println("Gracias por jugar!");
-		
+
 		entrada.close();
 	}
 }

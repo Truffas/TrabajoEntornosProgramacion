@@ -107,10 +107,10 @@ public class Juego {
 		if (!carpeta.exists()) {
 			carpeta.mkdirs(); // aquí creamos la carpeta si no existe
 		}
-		
+
 		File archivo = new File("registroMejores/mejorPuntuacion.txt");
 		int mejorRonda = 0;
-		
+
 		if (archivo.exists()) {
 			try {
 				Scanner entradaArchivo = new Scanner(archivo);
