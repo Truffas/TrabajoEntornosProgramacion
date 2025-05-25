@@ -5,6 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,6 +82,64 @@ Juego juego;
 	    String nombre = Juego.nombreAleatorio();
 	    assertNotNull(nombre);
 	    assertTrue(nombre.length() > 0);
+	}
+
+@Test
+	void guardarSiEsMejor_NoSupera() {
+		File archivo = new File("registroMejores/mejorPuntuacion.txt");
+		try {
+			FileWriter fw = new FileWriter(archivo);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("JugadorBueno");
+			pw.print(3);
+			pw.close();
+		} catch (IOException e) {
+			System.out.println("Error al leer el archivo");
+		}
+		
+		Juego.guardarSiEsMejor("JugadorMalo", 2);
+	
+		Scanner entrada = null;
+		try {
+			entrada = new Scanner(archivo);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String nombre = entrada.nextLine();
+		int rondas = Integer.parseInt(entrada.nextLine());
+		entrada.close();
+	
+		assertEquals("JugadorBueno", nombre);
+		assertEquals(3, rondas);
+	}
+
+@Test
+	void guardarSiEsMejor_SiSupera() {
+		File archivo = new File("registroMejores/mejorPuntuacion.txt");
+		try {
+			FileWriter fw = new FileWriter(archivo);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("JugadorMalo");
+			pw.print(2);
+			pw.close();
+		} catch (IOException e) {
+			System.out.println("Error al leer el archivo");
+		}
+		
+		Juego.guardarSiEsMejor("JugadorBueno", 3);
+	
+		Scanner entrada = null;
+		try {
+			entrada = new Scanner(archivo);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String nombre = entrada.nextLine();
+		int rondas = Integer.parseInt(entrada.nextLine());
+		entrada.close();
+	
+		assertEquals("JugadorBueno", nombre);
+		assertEquals(3, rondas);
 	}
 
 

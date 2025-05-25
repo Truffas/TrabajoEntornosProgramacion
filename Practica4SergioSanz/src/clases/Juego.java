@@ -88,14 +88,18 @@ public class Juego {
 		File archivo = new File("registroMejores/mejorPuntuacion.txt");
 
 		if (archivo.exists()) {
-			try {
-				Scanner entradaArchivo = new Scanner(archivo);
-				String nombre = entradaArchivo.nextLine(); // aquí leemos el nombre
-				int nRondas = Integer.parseInt(entradaArchivo.nextLine()); // y aquí las rondas
-				System.out.println("El mejor jugador es: " + nombre + ", con un total de: " + nRondas + " rondas");
-				entradaArchivo.close();
-			} catch (Exception e) {
-				System.err.println("Error al intentar leer el archivo");
+			if (archivo.length() == 0) {
+				System.out.println("Todavía no hay ninguna puntuación guardada");
+			} else {
+				try {
+					Scanner entradaArchivo = new Scanner(archivo);
+					String nombre = entradaArchivo.nextLine();
+					int nRondas = Integer.parseInt(entradaArchivo.nextLine());
+					System.out.println("El mejor jugador es: " + nombre + ", con un total de: " + nRondas + " rondas");
+					entradaArchivo.close();
+				} catch (Exception e) {
+					System.err.println("Error al intentar leer el archivo");
+				}
 			}
 		} else {
 			System.out.println("Todavía no hay ninguna puntuación guardada");
@@ -103,30 +107,27 @@ public class Juego {
 	}
 
 	public static void guardarSiEsMejor(String nombre, int nRondas) {
-		File carpeta = new File("registroMejores");
-		if (!carpeta.exists()) {
-			carpeta.mkdirs(); // aquí creamos la carpeta si no existe
-		}
 
 		File archivo = new File("registroMejores/mejorPuntuacion.txt");
 		int mejorRonda = 0;
 
-		if (archivo.exists()) {
+		if (archivo.exists() && archivo.length() > 0) {
 			try {
 				Scanner entradaArchivo = new Scanner(archivo);
-				entradaArchivo.nextLine(); // para no leer al jugador
-				mejorRonda = Integer.parseInt(entradaArchivo.nextLine()); // leemos la mejor ronda y la guardamos
+				entradaArchivo.nextLine();
+				mejorRonda = Integer.parseInt(entradaArchivo.nextLine());
 				entradaArchivo.close();
 			} catch (Exception e) {
-				System.err.println();
+				System.err.println("Error al leer la puntuación guardada");
 			}
 		}
 
 		if (nRondas > mejorRonda) {
 			try {
-				PrintWriter pw = new PrintWriter(new FileWriter(archivo));
+				FileWriter fw = new FileWriter(archivo);
+				PrintWriter pw = new PrintWriter(fw);
 				pw.println(nombre);
-				pw.println(nRondas);
+				pw.print(nRondas);
 				pw.close();
 				System.out.println("¡Nuevo récord guardado!");
 			} catch (Exception e) {
